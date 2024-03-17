@@ -52,6 +52,8 @@ public class Ship : IDisposable
 
         for (int i = _aliveSegments.Length - 1; i >= 0; i--)
             _aliveSegments[i] = true;
+
+        IsAlive = true;
     }
 
     /// <summary>
@@ -61,7 +63,7 @@ public class Ship : IDisposable
     /// <returns>True if the hit was successful, otherwise false.</returns>
     public bool Hit(int index)
     {
-        if (_aliveSegments[index])
+        if (!_aliveSegments[index])
         {
             OnHited?.Invoke(false, index);
             return false;
