@@ -57,6 +57,13 @@ public class Ship : IDisposable
     }
 
     /// <summary>
+    /// Returns a value indicating whether the specified segment of the ship is alive.
+    /// </summary>
+    /// <param name="index">The index of the segment to check.</param>
+    /// <returns>True if the specified segment is alive, otherwise false.</returns>
+    public bool CheckSegment(int index) => _aliveSegments[index];
+
+    /// <summary>
     /// Method that is called when the ship is hit.
     /// </summary>
     /// <param name="index">The index of the segment that was hit.</param>
@@ -70,7 +77,7 @@ public class Ship : IDisposable
         }
 
         _aliveSegments[index] = false;
-        IsAlive = _aliveSegments.All(x => x == true);
+        IsAlive = !_aliveSegments.All(x => x == false);
         OnHited?.Invoke(true, index);
         return true;
     }
@@ -79,5 +86,8 @@ public class Ship : IDisposable
     {
         OnHited = null;
         _aliveSegments = new bool[0];
+        IsAlive = false;
+        Length = 0;
+        Orientation = 0;
     }
 }

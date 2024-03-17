@@ -6,10 +6,15 @@ public class Board : IDisposable
     public event Action<Ship, uint, uint>? OnShipRemoved;
     public event Action<uint, uint, bool>? OnHited;
 
+    public uint Width { get; protected set; }
+    public uint Height { get; protected set; }
+
     private Ceil[,] _ceils;
 
     public Board(uint width, uint height)
     {
+        Width = width; 
+        Height = height;
         _ceils = new Ceil[width, height];
 
         for (int i = 0; i < width; i++)
@@ -19,6 +24,8 @@ public class Board : IDisposable
 
     public Board(Ceil[,] ceils)
     {
+        Width = (uint)ceils.GetLength(0);
+        Height = (uint)ceils.GetLength(1);
         _ceils = ceils;
     }
 
