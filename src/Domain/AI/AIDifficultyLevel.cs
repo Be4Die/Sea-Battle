@@ -1,8 +1,7 @@
-﻿namespace Domain.AI;
+﻿namespace SeaBattle.Domain.AI;
 
 public enum AIDifficultyLevel
 {
     Easy,
     Medium,
-    Hard
 }

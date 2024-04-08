@@ -1,4 +1,4 @@
-﻿namespace Domain.AI;
+﻿namespace SeaBattle.Domain.AI;
 
 public interface IAIAgent
 {
