@@ -1,4 +1,4 @@
-﻿namespace SeaBattle.Domain;
+﻿namespace SeaBattle.Domain.GameBoard;
 
 /// <summary>
 /// Represents a single cell on the game board.

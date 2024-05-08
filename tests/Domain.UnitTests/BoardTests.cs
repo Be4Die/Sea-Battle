@@ -1,4 +1,6 @@
-﻿namespace Domain.UnitTests;
+﻿using SeaBattle.Domain.GameBoard;
+
+namespace SeaBattle.Domain.UnitTests;
 
 public class BoardTests
 {

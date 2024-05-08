@@ -1,5 +1,7 @@
-﻿namespace Domain.UnitTests.AI_Tests;
-using SeaBattle.Domain.AI;
+﻿using SeaBattle.Domain.AI;
+using SeaBattle.Domain.GameBoard;
+
+namespace Domain.UnitTests.AITests;
 
 public class RandomAgentTests 
 {

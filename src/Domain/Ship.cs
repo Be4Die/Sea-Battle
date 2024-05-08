@@ -24,7 +24,7 @@ public class Ship : IDisposable
     /// </summary>
     public bool IsAlive { get; protected set; }
 
-    /// <summary>
+    /// <summary>Фф
     /// The orientation of the ship.
     /// </summary>
     public Orientations Orientation { get; protected set; }

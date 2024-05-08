@@ -1,4 +1,6 @@
 ﻿
+using SeaBattle.Domain.GameBoard;
+
 namespace SeaBattle.Domain.AI;
 
 public static class AIAgentFactory

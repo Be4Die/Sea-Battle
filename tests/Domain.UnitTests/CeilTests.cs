@@ -1,4 +1,5 @@
-﻿namespace Domain.UnitTests;
+﻿using SeaBattle.Domain.GameBoard;
+namespace Domain.UnitTests;
 
 public class CeilTests
 {

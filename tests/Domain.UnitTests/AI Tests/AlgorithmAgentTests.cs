@@ -1,4 +1,6 @@
-﻿namespace Domain.UnitTests.AI_Tests;
+﻿namespace Domain.UnitTests.AITests;
+using SeaBattle.Domain.GameBoard;
+
 using SeaBattle.Domain.AI;
 
 public class AlgorithmAgentTests

@@ -1,4 +1,4 @@
-﻿namespace SeaBattle.Domain;
+﻿namespace SeaBattle.Domain.GameBoard;
 
 public class Board : IDisposable
 {
@@ -27,6 +27,22 @@ public class Board : IDisposable
         Width = (uint)ceils.GetLength(0);
         Height = (uint)ceils.GetLength(1);
         _ceils = ceils;
+    }
+
+    public bool CheckAllShipsDestroiedCondition()
+    {
+        bool isDestroied = true;
+        for (int i = 0; i < _ceils.GetLength(0); i++)
+        {
+            for (int j = 0; j < _ceils.GetLength(1); j++)
+            {
+                if (_ceils[i, j].ContainShip == true && _ceils[i,j].Ship?.IsAlive == true)
+                {
+                    return false;
+                }
+            }
+        }
+        return isDestroied;
     }
 
     public bool Hit(uint x, uint y)
@@ -89,6 +105,14 @@ public class Board : IDisposable
         }
         OnShipPlaced?.Invoke(ship, xStart, yStart);
         return true;
+    }
+
+    public Ceil? GetCeil(uint x, uint y) 
+    {
+        if (x >= _ceils.GetLength(0) || y >= _ceils.GetLength(1))
+            return null;
+
+        return _ceils[x, y];
     }
 
     public bool CanShipPlaced(Ship ship, uint xStart, uint yStart)

@@ -1,4 +1,6 @@
-﻿namespace SeaBattle.Domain.AI;
+﻿using SeaBattle.Domain.GameBoard;
+
+namespace SeaBattle.Domain.AI;
 
 /// <summary>
 /// Represents an AI agent that makes random moves on the game board.
@@ -43,6 +45,50 @@ public sealed class RandomAgent : IAIAgent
 
         // Shuffle the points array to randomize the order of moves.
         random.Shuffle(_points);
+    }
+
+    // <summary>
+    /// Generates a new game board with the specified width, height, and ships.
+    /// The method attempts to place each ship randomly on the board, ensuring that
+    /// the ship fits within the board boundaries and does not overlap with any other ships.
+    /// If a ship cannot be placed after a certain number of attempts, it is ignored.
+    /// </summary>
+    /// <param name="width">The width of the game board.</param>
+    /// <param name="height">The height of the game board.</param>
+    /// <param name="shipsToPlace">An array of ships to be placed on the board.</param>
+    /// <returns>The generated game board with the ships placed.</returns>
+    public Board GenerateBoard(uint width, uint height, Ship[] shipsToPlace)
+    {
+        var board = new Board(width, height);
+        var random = new Random();
+
+        // Create a list of all available coordinates
+        var availableCoordinates = new List<(int, int)>();
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                availableCoordinates.Add((x, y));
+            }
+        }
+
+        foreach (var ship in shipsToPlace)
+        {
+            bool isPlaced = false;
+
+            while (!isPlaced && availableCoordinates.Count > 0)
+            {
+                // We choose a random coordinate from the available ones
+                int index = random.Next(availableCoordinates.Count);
+                var (xStart, yStart) = availableCoordinates[index];
+                availableCoordinates.RemoveAt(index); // Remove the selected coordinate from the available coordinates
+
+                // Attempting to place the ship at the selected coordinates
+                isPlaced = board.PlaceShip(ship, (uint)xStart, (uint)yStart);
+            }
+        }
+
+        return board;
     }
 
     /// <summary>
