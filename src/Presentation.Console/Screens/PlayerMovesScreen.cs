@@ -124,7 +124,7 @@ internal class PlayerMovesScreen : BaseGameScreen
                 {
                     if (ceil.Ship != null && ceil.ShipSegmentIndex != null && ceil.Ship.CheckSegment((int)ceil.ShipSegmentIndex))
                     {
-                        sb.Append(Chars.Ship);
+                        sb.Append(' ');
                     }
                     else
                     {
