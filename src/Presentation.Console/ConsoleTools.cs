@@ -1,13 +1,20 @@
-﻿using Presentation.Console.Resources;
-using SeaBattle.Domain.GameBoard;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace SeaBattle.PresentationConsole;
 
+/// <summary>
+/// Provides utility methods for console applications.
+/// </summary>
 internal static class ConsoleTools
 {
+    /// <summary>
+    /// Sets the console window size based on the provided text.
+    /// </summary>
+    /// <param name="text">The text to base the console size on.</param>
+    /// <param name="safeSpace">The additional space to add to the width and height.</param>
+    /// <param name="setWidth">Whether to set the width of the console window.</param>
+    /// <param name="setHeight">Whether to set the height of the console window.</param>
     public static void SetConsoleSizeFromText(string text, int safeSpace = 5, bool setWidth = true, bool setHeight = true)
     {
         int maxLineLength = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
@@ -32,41 +39,5 @@ internal static class ConsoleTools
         {
             Debug.WriteLine($"[{nameof(ConsoleTools)}] {e.Message}");
         }
-    }
-
-    public static string BoardToString(Board board)
-    {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < board.Width * 2 + 1; i++)
-        {
-            sb.Append(Chars.BorderBottom);
-        }
-        sb.AppendLine();
-        for (int y = 0; y < board.Height; y++)
-        {
-            sb.Append(Chars.BorderLeft);
-            for (int x = 0; x < board.Width; x++)
-            {
-                var ceil = board.GetCeil((uint)x, (uint)y);
-                if (ceil != null && ceil.ContainShip)
-                {
-                    sb.Append('X');
-                }
-                else
-                {
-                    sb.Append(' ');
-                }
-                if (x != board.Width - 1)
-                    sb.Append(' ');
-            }
-            sb.Append(Chars.BorderRight);
-            sb.AppendLine();
-        }
-        for (int i = 0; i < board.Width * 2 + 1; i++)
-        {
-            sb.Append(Chars.BoarderTop);
-        }
-
-        return sb.ToString();
     }
 }

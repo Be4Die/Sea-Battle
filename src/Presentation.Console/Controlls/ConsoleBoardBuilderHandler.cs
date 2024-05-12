@@ -3,16 +3,38 @@ using SeaBattle.Domain.BoardNavigation;
 
 namespace SeaBattle.PresentationConsole.Controlls;
 
+/// <summary>
+/// Handles player board building actions in a console application.
+/// </summary>  
 internal class ConsoleBoardBuilderHandler : IPlayerBoardBuilldHandler, IDisposable
 {
-    public bool Enabaled { get ; set; }
-
+    /// <summary>
+    /// Event that is triggered when a rotate action is pressed.
+    /// </summary>
     public event Action? OnRotatePress;
+
+    /// <summary>
+    /// Event that is triggered when a move action is pressed.
+    /// </summary>
     public event Action<MoveDirection>? OnMovePress;
+
+    /// <summary>
+    /// Event that is triggered when a place action is pressed.
+    /// </summary>
     public event Action? OnPlacePress;
+
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the console board builder handler is enabled.
+    /// </summary>
+    public bool Enabaled { get ; set; }
 
     private Input _input;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConsoleBoardBuilderHandler"/> class with the specified input handler.
+    /// </summary>
+    /// <param name="input">The input handler to use for key press events.</param>
     public ConsoleBoardBuilderHandler(Input input)
     {
         _input = input;
@@ -39,7 +61,12 @@ internal class ConsoleBoardBuilderHandler : IPlayerBoardBuilldHandler, IDisposab
             OnMovePress?.Invoke(MoveDirection.Right);
     }
 
+    /// <summary>
+    /// Releases the resources used by the <see cref="ConsoleBoardBuilderHandler"/> class.
+    /// </summary>
     public void Dispose()
     {
+        Enabaled = false;
+        _input.OnKeyPress -= KeyPressCallback;
     }
 }

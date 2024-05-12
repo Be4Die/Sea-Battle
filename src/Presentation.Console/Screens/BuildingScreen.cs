@@ -3,13 +3,21 @@ using SeaBattle.Application.BoardBuilding;
 using SeaBattle.Domain.GameBoard;
 using System.Text;
 
-
 namespace SeaBattle.PresentationConsole.Screens;
 
+/// <summary>
+/// Represents a screen that displays the board building process in a console application.
+/// </summary>
 internal class BuildingScreen : BaseGameScreen
 {
     private readonly PlayerBoardBuilder _boardBuilder;
     private readonly Board _board;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BuildingScreen"/> class with the specified board and board builder.
+    /// </summary>
+    /// <param name="board">The board to be built.</param>
+    /// <param name="builder">The board builder.</param>
     public BuildingScreen(Board board, PlayerBoardBuilder builder)
     {
         _boardBuilder = builder;
@@ -31,19 +39,25 @@ internal class BuildingScreen : BaseGameScreen
 
     private void BuilderOnMovedCallback(Domain.BoardNavigation.MoveDirection direction) => Update();
 
+    /// <summary>
+    /// Updates the screen content.
+    /// </summary>
     public override void Update()
     {
         _content = BoardToString();
         base.Update();
     }
 
+    /// <summary>
+    /// Shows the screen.
+    /// </summary>
     public override void Show()
     {
         _content = BoardToString();
         base.Show();
     }
 
-    public string BoardToString()
+    private string BoardToString()
     {
         // Оставь надежду всяк сюда входящий
         StringBuilder sb = new StringBuilder();

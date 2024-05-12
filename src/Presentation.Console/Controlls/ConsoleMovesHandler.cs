@@ -3,14 +3,32 @@ using SeaBattle.Domain.BoardNavigation;
 
 namespace SeaBattle.PresentationConsole.Controlls;
 
+/// <summary>
+/// Handles player moves in a console application.
+/// </summary>
 internal class ConsoleMovesHandler : IPlayerMovesHandler, IDisposable
 {
+    /// <summary>
+    /// Event that is triggered when a move action is pressed.
+    /// </summary>
+    public event Action<MoveDirection>? OnMovePress;
+
+    /// <summary>
+    /// Event that is triggered when a shoot action is pressed.
+    /// </summary>
+    public event Action? OnShootPress;
+
+    // <summary>
+    /// Gets or sets a value indicating whether the console moves handler is enabled.
+    /// </summary>
     public bool Enabaled { get; set; }
 
-    public event Action<MoveDirection>? OnMovePress;
-    public event Action? OnShootPress;
     private Input _input;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConsoleMovesHandler"/> class with the specified input handler.
+    /// </summary>
+    /// <param name="input">The input handler to use for key press events.</param>
     public ConsoleMovesHandler(Input input)
     {
         _input = input;
@@ -34,6 +52,9 @@ internal class ConsoleMovesHandler : IPlayerMovesHandler, IDisposable
             OnMovePress?.Invoke(MoveDirection.Right);
     }
 
+    /// <summary>
+    /// Releases the resources used by the <see cref="ConsoleMovesHandler"/> class.
+    /// </summary>
     public void Dispose()
     {
         Enabaled = false;

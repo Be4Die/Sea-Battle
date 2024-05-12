@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SeaBattle.PresentationConsole.Screens;
 
-namespace SeaBattle.PresentationConsole.Screens;
-
-internal class EmptyScreen : ScreenView
-{
-}
+/// <summary>
+/// Represents an empty screen in a console application.
+/// </summary>
+internal class EmptyScreen : ScreenView { }

@@ -1,18 +1,25 @@
 ﻿using Presentation.Console.Resources;
 using SeaBattle.Application.PlayerMoves;
 using SeaBattle.Domain.GameBoard;
-using System.Diagnostics;
 using System.Text;
 
 namespace SeaBattle.PresentationConsole.Screens;
 
-
+/// <summary>
+/// Represents a screen that displays the player's moves in a console application.
+/// </summary>
 internal class PlayerMovesScreen : BaseGameScreen
 {
     private readonly Board _playerBoard;
     private readonly Board _enemyBoard;
     private readonly PlayerMovesController _controller;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PlayerMovesScreen"/> class with the specified player and enemy boards and moves controller.
+    /// </summary>
+    /// <param name="playerBoard">The player's board.</param>
+    /// <param name="enemyBoard">The enemy's board.</param>
+    /// <param name="movesController">The moves controller.</param>
     public PlayerMovesScreen(Board playerBoard, Board enemyBoard, PlayerMovesController movesController)
     {
         _header = TextsRU.AttackEnemyTask.Replace("\\n", Environment.NewLine);
@@ -21,45 +28,29 @@ internal class PlayerMovesScreen : BaseGameScreen
         _enemyBoard = enemyBoard;
         _controller = movesController;
 
-
-        _content = CombineBoards(PlayerBoardString(), EnemyBoardString());
+        _content = EnemyBoardString() + "\n" + PlayerBoardString();
 
         _controller.OnMoved += ControllerOnMovedCallback;
     }
 
     private void ControllerOnMovedCallback(Domain.BoardNavigation.MoveDirection obj) => Update();
 
+    /// <summary>
+    /// Updates the screen content.
+    /// </summary>
     public override void Update()
     {
-        //_content = CombineBoards(EnemyBoardString(), PlayerBoardString());
         _content = EnemyBoardString() + "\n" + PlayerBoardString();
         base.Update();
     }
 
+    /// <summary>
+    /// Shows the screen.
+    /// </summary>
     public override void Show()
     {
-        //_content = CombineBoards(EnemyBoardString(), PlayerBoardString());
         _content = EnemyBoardString() + "\n" + PlayerBoardString();
         base.Show();
-    }
-
-    private string CombineBoards(string left, string right)
-    {
-        string[] linesLeft = left.Split('\n'); 
-        string[] linesRight = right.Split('\n'); 
-
-        int maxLengthLeft = GetMaxLength(linesLeft); 
-        int maxLengthRight = GetMaxLength(linesRight); 
-
-        int maxLength = Math.Max(maxLengthLeft, maxLengthRight);
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < linesLeft.Length; i++)
-        {
-            sb.AppendLine(linesLeft[i].PadRight(maxLength) + "     " + linesRight[i].PadLeft(maxLength));
-        }
-        sb.AppendLine();
-        return sb.ToString();
     }
 
     private string PlayerBoardString()
@@ -161,19 +152,5 @@ internal class PlayerMovesScreen : BaseGameScreen
         sb.AppendLine();
 
         return sb.ToString();
-    }
-
-
-    private int GetMaxLength(string[] lines)
-    {
-        int maxLength = 0;
-        foreach (string line in lines)
-        {
-            if (line.Length > maxLength)
-            {
-                maxLength = line.Length;
-            }
-        }
-        return maxLength;
     }
 }

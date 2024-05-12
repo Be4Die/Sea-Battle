@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SeaBattle.PresentationConsole.Screens;
+﻿namespace SeaBattle.PresentationConsole.Screens;
 
 // <summary>
 /// The exception that is thrown when a screen is missing.

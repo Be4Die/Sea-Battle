@@ -7,13 +7,19 @@ using SeaBattle.Domain.GameBoard;
 
 namespace SeaBattle.PresentationConsole.Screens;
 
+/// <summary>
+/// Manages the screens for a console application based on the game state.
+/// </summary>
 internal sealed class ScreenManager : IDisposable
 {
     private Dictionary<Type, ScreenView> _screens = new ();
     public ScreenView? _lastScreen;
     private GameStateMachine _stateMachine;
 
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ScreenManager"/> class with the specified game state machine.
+    /// </summary>
+    /// <param name="stateMachine">The game state machine to use for managing the screens.</param>
     public ScreenManager(GameStateMachine stateMachine)
     {
         var playerBoard = GameContext.ResolveById<Board>(GameContext.PlayerBoardId);
@@ -27,9 +33,6 @@ internal sealed class ScreenManager : IDisposable
             playerBoard,
             enemyBoard,
             GameContext.ResolveSingle<PlayerMovesController>());
-        /*_screens[typeof(EnemyMoveState)] = new EnemyMovesScreen(playerBoard,
-            enemyBoard,
-            GameContext.ResolveSingle<PlayerMovesController>());*/
         _screens[typeof(EnemyMoveState)] = new EmptyScreen();
         _screens[typeof(PlayerWinState)] = new WinScreen();
         _screens[typeof(EnemyWinState)] = new LoseScreen();
@@ -38,11 +41,6 @@ internal sealed class ScreenManager : IDisposable
 
         _stateMachine = stateMachine;
         _stateMachine.OnStateChanged += OnStateChangedCallback;
-    }
-
-    public void Dispose()
-    {
-        _stateMachine.OnStateChanged -= OnStateChangedCallback;
     }
 
     private void OnStateChangedCallback(Type type)
@@ -54,4 +52,13 @@ internal sealed class ScreenManager : IDisposable
         _lastScreen = _screens[type];
         _lastScreen.Show();
     }
+
+    /// <summary>
+    /// Releases the resources used by the <see cref="ScreenManager"/> class.
+    /// </summary>
+    public void Dispose()
+    {
+        _stateMachine.OnStateChanged -= OnStateChangedCallback;
+    }
+
 }
