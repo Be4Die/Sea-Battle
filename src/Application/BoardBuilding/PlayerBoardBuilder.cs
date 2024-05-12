@@ -35,6 +35,16 @@ public sealed class PlayerBoardBuilder
         Board = board;
     }
 
+    public void Restart()
+    {
+        _currentShipIndex = 0;
+        CursorData.HoldingShip = _orderedShips[0];
+        foreach (var item in _orderedShips)
+        {
+            item.SetShipAlive();
+        }
+    }
+
     /// <summary>
     /// Moves the ship in the specified direction.
     /// </summary>
@@ -46,10 +56,10 @@ public sealed class PlayerBoardBuilder
 
         switch (direction)
         {
-            case MoveDirection.Left: CursorData.X = (int)Math.Clamp(CursorData.X - 1, 0, Board.Width); break;
-            case MoveDirection.Right: CursorData.X = (int)Math.Clamp(CursorData.X + 1, 0, Board.Width); break;
-            case MoveDirection.Up: CursorData.Y = (int)Math.Clamp(CursorData.Y - 1, 0, Board.Height); break;
-            case MoveDirection.Down: CursorData.Y = (int)Math.Clamp(CursorData.Y + 1, 0, Board.Height); break;
+            case MoveDirection.Left: CursorData.X = (int)Math.Clamp(CursorData.X - 1, 0, Board.Width-1); break;
+            case MoveDirection.Right: CursorData.X = (int)Math.Clamp(CursorData.X + 1, 0, Board.Width-1); break;
+            case MoveDirection.Up: CursorData.Y = (int)Math.Clamp(CursorData.Y - 1, 0, Board.Height-1); break;
+            case MoveDirection.Down: CursorData.Y = (int)Math.Clamp(CursorData.Y + 1, 0, Board.Height-1); break;
             default: throw new NotImplementedException();
         }
 

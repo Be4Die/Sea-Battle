@@ -20,6 +20,11 @@ public sealed class Input : IDisposable
         _inputTask = Task.Run(HandleKeys, _cts.Token);
     }
 
+    public void Stop()
+    {
+        _cts.Cancel();
+    }
+
     public void Dispose()
     {
         OnKeyPress -= LogKey;

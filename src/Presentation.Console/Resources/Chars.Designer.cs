@@ -133,6 +133,15 @@ namespace Presentation.Console.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ☒.
+        /// </summary>
+        internal static string HitedShip {
+            get {
+                return ResourceManager.GetString("HitedShip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ○.
         /// </summary>
         internal static string HitMiss {

@@ -3,7 +3,7 @@ using SeaBattle.Domain.StateMachinePattern;
 
 namespace SeaBattle.Application.GameStates.States;
 
-internal class PlayerMoveState : IState, IDisposable
+public class PlayerMoveState : IState, IDisposable
 {
     private readonly IPlayerMovesHandler _movesHandler;
     private readonly PlayerMovesController _movesController;

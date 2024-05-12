@@ -65,10 +65,11 @@ public static class GameContext
         InjectSingle<GameRuleData>(gameRule);
         var boardFactory = new BoardFactory();
         var playerBoard = boardFactory.CreateBoardFromRules(gameRule);
-        var enemyBoard = boardFactory.CreateBoardFromRules(gameRule);
         InjectById<Board>(playerBoard, PlayerBoardId);
+        var agent = AIAgentFactory.CreateAgent(gameRule.DifficultyLevel, playerBoard);
+        InjectSingle<IAIAgent>(agent);
+        var enemyBoard = boardFactory.CreateEnemyBoard(gameRule, agent);
         InjectById<Board>(enemyBoard, EnemyBoardId);
-        InjectSingle<IAIAgent>(AIAgentFactory.CreateAgent(gameRule.DifficultyLevel, playerBoard));
 
         InjectSingle<Ship[]>(new ShipFactory().CreateShipsFromGameRule(gameRule));
 
@@ -79,5 +80,24 @@ public static class GameContext
         InjectSingle<GameCycle>(new GameCycleFactory().Create());
 
         Debug.WriteLine($"[{nameof(GameContext)}] {nameof(GameContext.Initialize)}");
+    }
+
+    public static void Dispose()
+    {
+        foreach (var item in _singleDIContainer)
+        {
+            var disposible = item.Value as IDisposable;
+            if (disposible != null)
+                disposible.Dispose();
+        }
+
+        foreach (var item in _idDIContainer)
+        {
+            var disposible = item.Value as IDisposable;
+            if (disposible != null)
+                disposible.Dispose();
+        }
+
+        Debug.WriteLine($"[{nameof(GameContext)}] {nameof(GameContext.Dispose)}");
     }
 }

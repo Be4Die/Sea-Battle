@@ -6,12 +6,12 @@ internal abstract class ScreenView
 {
     public virtual void Show()
     {
-        Console.Clear();
         Debug.WriteLine($"[{GetType().Name}] Show");
     }
 
     public virtual void Hide()
     {
+        Console.Clear();
         Debug.WriteLine($"[{GetType().Name}] Hide");
     }
 }

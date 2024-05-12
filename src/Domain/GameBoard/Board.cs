@@ -1,4 +1,6 @@
-﻿namespace SeaBattle.Domain.GameBoard;
+﻿using System.Text;
+
+namespace SeaBattle.Domain.GameBoard;
 
 public class Board : IDisposable
 {
@@ -27,6 +29,15 @@ public class Board : IDisposable
         Width = (uint)ceils.GetLength(0);
         Height = (uint)ceils.GetLength(1);
         _ceils = ceils;
+    }
+
+    public void Clear()
+    {
+        _ceils = new Ceil[Width, Height];
+
+        for (int i = 0; i < Width; i++)
+            for (int j = 0; j < Height; j++)
+                _ceils[i, j] = new();
     }
 
     public bool CheckAllShipsDestroiedCondition()
@@ -171,5 +182,38 @@ public class Board : IDisposable
         OnHited = null;
         OnShipPlaced = null;
         OnShipRemoved = null;
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+
+        sb.Append("Board: ");
+        sb.AppendLine();
+        for (int i = 0; i < Width; i++)
+        {   
+            for (int j = 0; j < Height; j++)
+            {
+                if (_ceils[i, j].ContainShip)
+                {
+                    if (_ceils[i,j].IsHited)
+                        sb.Append('2');
+                    else
+                        sb.Append('1');
+                }
+                else
+                {
+                    if (_ceils[i, j].IsHited)
+                        sb.Append("-1");
+                    else
+                        sb.Append('0');
+                }
+                sb.Append(' ');
+            }
+            sb.AppendLine();
+        }
+        sb.AppendLine();
+
+        return sb.ToString();
     }
 }

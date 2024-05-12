@@ -37,6 +37,12 @@ internal class BuildingScreen : BaseGameScreen
         base.Update();
     }
 
+    public override void Show()
+    {
+        _content = BoardToString();
+        base.Show();
+    }
+
     public string BoardToString()
     {
         // Оставь надежду всяк сюда входящий

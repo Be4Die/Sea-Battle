@@ -20,10 +20,10 @@ public class PlayerMovesController
     {
         switch (direction)
         {
-            case MoveDirection.Left: Cursor.X = (int)Math.Clamp(Cursor.X - 1, 0, _board.Width); break;
-            case MoveDirection.Right: Cursor.X = (int)Math.Clamp(Cursor.X + 1, 0, _board.Width); break;
-            case MoveDirection.Up: Cursor.Y = (int)Math.Clamp(Cursor.Y - 1, 0, _board.Height); break;
-            case MoveDirection.Down: Cursor.Y = (int)Math.Clamp(Cursor.Y + 1, 0, _board.Height); break;
+            case MoveDirection.Left: Cursor.X = (int)Math.Clamp(Cursor.X - 1, 0, _board.Width-1); break;
+            case MoveDirection.Right: Cursor.X = (int)Math.Clamp(Cursor.X + 1, 0, _board.Width-1); break;
+            case MoveDirection.Up: Cursor.Y = (int)Math.Clamp(Cursor.Y - 1, 0, _board.Height-1); break;
+            case MoveDirection.Down: Cursor.Y = (int)Math.Clamp(Cursor.Y + 1, 0, _board.Height - 1); break;
             default: throw new NotImplementedException();
         }
         Cursor.ChoosenElement = _board.GetCeil((uint)Cursor.X, (uint)Cursor.Y);
@@ -33,7 +33,7 @@ public class PlayerMovesController
 
     public bool DoShoot()
     {
-        if (Cursor.ChoosenElement == null)
+        if (Cursor.ChoosenElement == null || Cursor.ChoosenElement.IsHited)
             return false;
 
         OnMoveCompleted?.Invoke();

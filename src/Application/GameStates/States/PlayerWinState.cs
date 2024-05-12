@@ -1,12 +1,6 @@
-﻿using SeaBattle.Domain.StateMachinePattern;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SeaBattle.Application.GameStates.States;
 
-namespace SeaBattle.Application.GameStates.States;
-
-public class PlayerWinState : IState
+public class PlayerWinState : GameEndState
 {
+    public PlayerWinState(IGameEndActionHandler restartHandler) : base(restartHandler) { }
 }

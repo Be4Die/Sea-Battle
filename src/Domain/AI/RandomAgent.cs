@@ -9,6 +9,7 @@ namespace SeaBattle.Domain.AI;
 /// </summary>
 public sealed class RandomAgent : IAIAgent
 {
+    private readonly Random _random = new Random();
     private readonly Board _board;
 
     /// <summary>
@@ -28,7 +29,6 @@ public sealed class RandomAgent : IAIAgent
     public RandomAgent(Board board)
     {
         _board = board;
-        var random = new Random();
 
         // Create an array of all possible points on the board.
         _points = new (int, int)[_board.Width * _board.Height];
@@ -44,7 +44,37 @@ public sealed class RandomAgent : IAIAgent
         }
 
         // Shuffle the points array to randomize the order of moves.
-        random.Shuffle(_points);
+        _random.Shuffle(_points);
+    }
+
+    public void FillBoard(Board board, Ship[] shipsToPlace)
+    {
+
+        // Create a list of all available coordinates
+        var availableCoordinates = new List<(int, int)>();
+        for (int x = 0; x < board.Width; x++)
+        {
+            for (int y = 0; y < board.Height; y++)
+            {
+                availableCoordinates.Add((x, y));
+            }
+        }
+
+        foreach (var ship in shipsToPlace)
+        {
+            bool isPlaced = false;
+
+            while (!isPlaced && availableCoordinates.Count > 0)
+            {
+                // We choose a random coordinate from the available ones
+                int index = _random.Next(availableCoordinates.Count);
+                var (xStart, yStart) = availableCoordinates[index];
+                availableCoordinates.RemoveAt(index); // Remove the selected coordinate from the available coordinates
+
+                // Attempting to place the ship at the selected coordinates
+                isPlaced = board.PlaceShip(ship, (uint)xStart, (uint)yStart);
+            }
+        }
     }
 
     // <summary>
@@ -60,7 +90,6 @@ public sealed class RandomAgent : IAIAgent
     public Board GenerateBoard(uint width, uint height, Ship[] shipsToPlace)
     {
         var board = new Board(width, height);
-        var random = new Random();
 
         // Create a list of all available coordinates
         var availableCoordinates = new List<(int, int)>();
@@ -79,7 +108,7 @@ public sealed class RandomAgent : IAIAgent
             while (!isPlaced && availableCoordinates.Count > 0)
             {
                 // We choose a random coordinate from the available ones
-                int index = random.Next(availableCoordinates.Count);
+                int index = _random.Next(availableCoordinates.Count);
                 var (xStart, yStart) = availableCoordinates[index];
                 availableCoordinates.RemoveAt(index); // Remove the selected coordinate from the available coordinates
 

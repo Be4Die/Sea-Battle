@@ -14,5 +14,6 @@ internal class GameCycleFactory
         GameContext.ResolveSingle<PlayerBoardBuilder>(),
         GameContext.ResolveSingle<PlayerMovesController>(),
         GameContext.ResolveById<Board>(GameContext.PlayerBoardId),
-        GameContext.ResolveById<Board>(GameContext.EnemyBoardId));
+        GameContext.ResolveById<Board>(GameContext.EnemyBoardId),
+        GameContext.ResolveSingle<IGameEndActionHandler>());
 }

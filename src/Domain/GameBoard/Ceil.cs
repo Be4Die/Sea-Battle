@@ -81,10 +81,13 @@ public class Ceil : IDisposable
     {
         // If the cell has already been hit, or if it does not contain a ship, or if the ship segment index is not set,
         // the hit is not successful.
-        if (IsHited || Ship == null || ShipSegmentIndex == null)
+        if (IsHited)
             return false;
 
         IsHited = true;
+
+        if (Ship == null || ShipSegmentIndex == null)
+            return false;
         // Inform the ship that it has been hit.
         Ship.Hit(ShipSegmentIndex.Value);
         // Raise the OnHit event.

@@ -10,10 +10,8 @@ internal class BaseGameScreen : ScreenView
     public override void Show()
     {
         base.Show();
-        
         Console.WriteLine(_header);
-
-        for (int i = 0; i < Console.WindowWidth; i++)
+        for (int i = 0; i < Console.WindowWidth-10; i++)
         {
             Console.Write(_divider);
         }
@@ -24,6 +22,7 @@ internal class BaseGameScreen : ScreenView
             Console.SetCursorPosition((Console.WindowWidth - _content.Split("\n").Max(p => p.Length)) / 2, Console.CursorTop);
             Console.WriteLine(row);    
         }
+        Console.SetCursorPosition(0, 0);
     }
 
     public virtual void Update()

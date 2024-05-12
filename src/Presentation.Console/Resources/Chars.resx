@@ -141,6 +141,9 @@
   <data name="Hit" xml:space="preserve">
     <value>X</value>
   </data>
+  <data name="HitedShip" xml:space="preserve">
+    <value>☒</value>
+  </data>
   <data name="HitMiss" xml:space="preserve">
     <value>○</value>
   </data>

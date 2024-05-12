@@ -14,9 +14,11 @@ public sealed class GameCycle : IDisposable
     private readonly Board _playerBoard;
     private readonly Board _enemyBoard;
     private readonly IGameSetupHandler _gameSetup;
+    private readonly IGameEndActionHandler _gameEndActionHandler;
 
-    public GameCycle(IStateMachine gameStates, IGameSetupHandler gameSetup ,PlayerBoardBuilder playerBoardBuilder,
-        PlayerMovesController movesController, Board playerBoard, Board enemyBoard)
+    public GameCycle(IStateMachine gameStates, IGameSetupHandler gameSetup, PlayerBoardBuilder playerBoardBuilder,
+        PlayerMovesController movesController, Board playerBoard, Board enemyBoard,
+        IGameEndActionHandler gameEndActionHandler)
     {
         _gameStates = gameStates;
         _boardBuilder = playerBoardBuilder;
@@ -24,10 +26,43 @@ public sealed class GameCycle : IDisposable
         _playerBoard = playerBoard;
         _enemyBoard = enemyBoard;
         _gameSetup = gameSetup;
+        _gameEndActionHandler = gameEndActionHandler;
 
         _gameSetup.OnSetupEnd += OnGameSetupEndCallback;
         _boardBuilder.OnBuildCompleted += OnBuildCompletedCallback;
         _movesController.OnMoveCompleted += OnPlayerMoveCompleted;
+        _gameEndActionHandler.OnRestartHandle += OnRestartHandleCallback;
+        _gameEndActionHandler.OnQuietHandle += OnQuietHandleCallback;
+        _enemyBoard.OnHited += OnEnemyBoardHited;
+        _playerBoard.OnHited += OnPlayerBoardHited;
+    }
+
+    private void OnPlayerBoardHited(uint arg1, uint arg2, bool arg3)
+    {
+        if (_playerBoard.CheckAllShipsDestroiedCondition())
+        {
+            _gameStates.Change<EnemyWinState>();
+        }
+    }
+
+    private void OnEnemyBoardHited(uint arg1, uint arg2, bool arg3)
+    {
+        if (_enemyBoard.CheckAllShipsDestroiedCondition())
+        {
+            _gameStates.Change<PlayerWinState>();
+        }
+    }
+
+    private void OnQuietHandleCallback()
+    {
+
+        _gameStates.Change<ExitState>();
+    }
+
+    private void OnRestartHandleCallback()
+    {
+        _gameStates.Change<RestartState>();
+        _gameStates.Change<BuildingBoardState>();
     }
 
     public void Run()
@@ -43,12 +78,18 @@ public sealed class GameCycle : IDisposable
     private void OnPlayerMoveCompleted()
     {
         if (_enemyBoard.CheckAllShipsDestroiedCondition())
+        {
             _gameStates.Change<PlayerWinState>();
+            return;
+        }
 
-        _gameStates.Change<EnemyMove>();
+        _gameStates.Change<EnemyMoveState>();
 
         if (_playerBoard.CheckAllShipsDestroiedCondition())
+        {
             _gameStates.Change<EnemyWinState>();
+            return;
+        }
 
         _gameStates.Change<PlayerMoveState>();
     }
@@ -62,5 +103,6 @@ public sealed class GameCycle : IDisposable
         _gameSetup.OnSetupEnd -= OnGameSetupEndCallback;
         _boardBuilder.OnBuildCompleted -= OnBuildCompletedCallback;
         _movesController.OnMoveCompleted -= OnPlayerMoveCompleted;
+        _gameEndActionHandler.OnRestartHandle -= OnRestartHandleCallback;
     }
 }

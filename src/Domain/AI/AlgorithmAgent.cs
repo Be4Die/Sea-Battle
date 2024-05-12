@@ -179,10 +179,40 @@ public class AlgorithmAgent : IAIAgent
         return ((int)move.Item1, (int)move.Item1);
     }
 
+
+    public void FillBoard(Board board, Ship[] shipsToPlace)
+    {
+
+        // Create a list of all available coordinates
+        var availableCoordinates = new List<(int, int)>();
+        for (int x = 0; x < board.Width; x++)
+        {
+            for (int y = 0; y < board.Height; y++)
+            {
+                availableCoordinates.Add((x, y));
+            }
+        }
+
+        foreach (var ship in shipsToPlace)
+        {
+            bool isPlaced = false;
+
+            while (!isPlaced && availableCoordinates.Count > 0)
+            {
+                // We choose a random coordinate from the available ones
+                int index = _random.Next(availableCoordinates.Count);
+                var (xStart, yStart) = availableCoordinates[index];
+                availableCoordinates.RemoveAt(index); // Remove the selected coordinate from the available coordinates
+
+                // Attempting to place the ship at the selected coordinates
+                isPlaced = board.PlaceShip(ship, (uint)xStart, (uint)yStart);
+            }
+        }
+    }
+
     public Board GenerateBoard(uint width, uint height, Ship[] shipsToPlace)
     {
         var board = new Board(width, height);
-        var random = new Random();
 
         // Create a list of all available coordinates
         var availableCoordinates = new List<(int, int)>();
@@ -201,7 +231,7 @@ public class AlgorithmAgent : IAIAgent
             while (!isPlaced && availableCoordinates.Count > 0)
             {
                 // We choose a random coordinate from the available ones
-                int index = random.Next(availableCoordinates.Count);
+                int index = _random.Next(availableCoordinates.Count);
                 var (xStart, yStart) = availableCoordinates[index];
                 availableCoordinates.RemoveAt(index); // Remove the selected coordinate from the available coordinates
 

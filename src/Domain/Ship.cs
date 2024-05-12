@@ -56,6 +56,15 @@ public class Ship : IDisposable
         IsAlive = true;
     }
 
+    public void SetShipAlive()
+    {
+
+        for (int i = _aliveSegments.Length - 1; i >= 0; i--)
+            _aliveSegments[i] = true;
+
+        IsAlive = true;
+    }
+
     /// <summary>
     /// Returns a value indicating whether the specified segment of the ship is alive.
     /// </summary>

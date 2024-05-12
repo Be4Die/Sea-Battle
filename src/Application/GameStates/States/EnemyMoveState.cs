@@ -3,10 +3,10 @@ using SeaBattle.Domain.StateMachinePattern;
 
 namespace SeaBattle.Application.GameStates.States;
 
-public class EnemyMove : IState
+public class EnemyMoveState : IState
 {
     private readonly IAIAgent _agent;
-    public EnemyMove(IAIAgent agent)
+    public EnemyMoveState(IAIAgent agent)
     {
         _agent = agent;
     }

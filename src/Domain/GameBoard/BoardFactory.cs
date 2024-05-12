@@ -1,4 +1,5 @@
-﻿using SeaBattle.Domain.GameRules;
+﻿using SeaBattle.Domain.AI;
+using SeaBattle.Domain.GameRules;
 
 namespace SeaBattle.Domain.GameBoard;
 
@@ -8,4 +9,7 @@ public class BoardFactory
     {
         return new Board(data.BoardWidth, data.BoardHeight);
     }
+
+    public Board CreateEnemyBoard(GameRuleData data, IAIAgent agent) => agent.GenerateBoard(data.BoardWidth, data.BoardHeight,
+        new ShipFactory().CreateShipsFromGameRule(data));
 }

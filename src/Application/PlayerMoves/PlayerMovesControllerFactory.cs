@@ -6,5 +6,5 @@ namespace SeaBattle.Application.PlayerMoves;
 internal class PlayerMovesControllerFactory
 {
     public PlayerMovesController Create() => new PlayerMovesController(
-        GameContext.ResolveById<Board>(GameContext.PlayerBoardId));
+        GameContext.ResolveById<Board>(GameContext.EnemyBoardId));
 }

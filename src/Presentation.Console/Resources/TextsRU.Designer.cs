@@ -70,6 +70,15 @@ namespace Presentation.Console.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Игра закончена.\n - Начать заново - R\n Выйти из игры - Q.
+        /// </summary>
+        internal static string EndGamePromt {
+            get {
+                return ResourceManager.GetString("EndGamePromt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ░▒▓███████▓▒░▒▓████████▓▒░░▒▓██████▓▒░       ░▒▓███████▓▒░ ░▒▓██████▓▒░▒▓████████▓▒░▒▓████████▓▒░▒▓█▓▒░      ░▒▓████████▓▒░ \r\n░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓█▓▒░        \r\n░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓█▓▒░        \r\n ░▒▓██████▓▒░░▒▓██████▓▒░ ░▒▓████████▓▒░      ░▒▓███████▓▒░░▒▓████████▓▒░ ░▒▓█▓▒░      ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓██████▓▒░   \ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Logo {
@@ -79,20 +88,20 @@ namespace Presentation.Console.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to О боже, вы проиграли глупому компьютеру как так..
+        /// </summary>
+        internal static string LosePromt {
+            get {
+                return ResourceManager.GetString("LosePromt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Расставьте корабли на игровом поле.\n- Двигать корабль - WASD или Стрелки.\n- Поставить корабль - Enter.\n- Повернуть R..
         /// </summary>
         internal static string PlaceShipsTask {
             get {
                 return ResourceManager.GetString("PlaceShipsTask", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Если хотите начать заново нажмите Enter. . ..
-        /// </summary>
-        internal static string RestartGameLabel {
-            get {
-                return ResourceManager.GetString("RestartGameLabel", resourceCulture);
             }
         }
         
@@ -135,6 +144,15 @@ namespace Presentation.Console.Resources {
         internal static string WinPlayerLabel {
             get {
                 return ResourceManager.GetString("WinPlayerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляю вы победили..
+        /// </summary>
+        internal static string WinPromt {
+            get {
+                return ResourceManager.GetString("WinPromt", resourceCulture);
             }
         }
     }
