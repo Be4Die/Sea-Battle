@@ -12,12 +12,26 @@ namespace SeaBattle.Application.Contexts;
 
 public static class GameContext
 {
+    /// <summary>
+    /// The identifier for the player's board.
+    /// </summary>
     public static readonly string PlayerBoardId = "Player";
+
+    /// <summary>
+    /// The identifier for the enemy's board.
+    /// </summary>
     public static readonly string EnemyBoardId = "Enemy";
 
     private static Dictionary<Type, object> _singleDIContainer = new ();
     private static Dictionary<string, object> _idDIContainer = new ();
 
+    /// <summary>
+    /// Injects a single instance of a type into the dependency injection container.
+    /// </summary>
+    /// <typeparam name="T">The type of the instance to inject.</typeparam>
+    /// <param name="instance">The instance to inject.</param>
+    /// <exception cref="NullReferenceException">Thrown if the instance is null.</exception>
+    /// <exception cref="InjectDuplicateSingleInstanceException">Thrown if an instance of the same type is already injected.</exception>
     public static void InjectSingle<T>(T instance)
     {
         if (instance == null)
@@ -30,6 +44,12 @@ public static class GameContext
         Debug.WriteLine($"[{nameof(GameContext)}] {nameof(GameContext.InjectSingle)} <{typeof(T).Name}>");
     }
 
+    /// <summary>
+    /// Resolves a single instance of a type from the dependency injection container.
+    /// </summary>
+    /// <typeparam name="T">The type of the instance to resolve.</typeparam>
+    /// <returns>The resolved instance.</returns>
+    /// <exception cref="ResolveMissingDependencyException">Thrown if the instance is not found in the container.</exception>
     public static T ResolveSingle<T>()
     {
         if (!_singleDIContainer.ContainsKey(typeof(T)))
@@ -38,6 +58,14 @@ public static class GameContext
         return (T)_singleDIContainer[typeof(T)];
     }
 
+    /// <summary>
+    /// Injects an instance of a type into the dependency injection container with a specific identifier.
+    /// </summary>
+    /// <typeparam name="T">The type of the instance to inject.</typeparam>
+    /// <param name="instance">The instance to inject.</param>
+    /// <param name="id">The identifier for the instance.</param>
+    /// <exception cref="NullReferenceException">Thrown if the instance is null.</exception>
+    /// <exception cref="InjectDuplicateSingleInstanceException">Thrown if an instance with the same identifier is already injected.</exception>
     public static void InjectById<T>(T instance, string id)
     {
         if (instance == null)
@@ -51,6 +79,13 @@ public static class GameContext
 
     }
 
+    /// <summary>
+    /// Resolves an instance of a type from the dependency injection container by its identifier.
+    /// </summary>
+    /// <typeparam name="T">The type of the instance to resolve.</typeparam>
+    /// <param name="id">The identifier of the instance.</param>
+    /// <returns>The resolved instance.</returns>
+    /// <exception cref="ResolveMissingDependencyException">Thrown if the instance is not found in the container.</exception>
     public static T ResolveById<T>(string id)
     {
         if (!_idDIContainer.ContainsKey(id))
@@ -59,6 +94,9 @@ public static class GameContext
         return (T)_idDIContainer[id];
     }
 
+    /// <summary>
+    /// Initializes the game context by injecting game components into the dependency injection container.
+    /// </summary>
     public static void Initialize()
     {
         var gameRule = new GameRuleFactory().CreateClassicData();
@@ -82,6 +120,10 @@ public static class GameContext
         Debug.WriteLine($"[{nameof(GameContext)}] {nameof(GameContext.Initialize)}");
     }
 
+
+    /// <summary>
+    /// Disposes of all disposable instances in the dependency injection container.
+    /// </summary>
     public static void Dispose()
     {
         foreach (var item in _singleDIContainer)

@@ -35,6 +35,9 @@ public sealed class PlayerBoardBuilder
         Board = board;
     }
 
+    /// <summary>
+    /// Resets data and revives ships
+    /// </summary>
     public void Restart()
     {
         _currentShipIndex = 0;

@@ -6,8 +6,15 @@ using SeaBattle.Domain.GameBoard;
 
 namespace SeaBattle.Application.Cycle;
 
+/// <summary>
+/// Factory for creating instances of the <see cref="GameCycle"/> class.
+/// </summary>
 internal class GameCycleFactory
 {
+    /// <summary>
+    /// Creates a new instance of the <see cref="GameCycle"/> class using the services resolved from the game context.
+    /// </summary>
+    /// <returns>A new instance of the <see cref="GameCycle"/> class.</returns>
     internal GameCycle Create() => new GameCycle(
         GameContext.ResolveSingle<GameStateMachine>(),
         GameContext.ResolveSingle<IGameSetupHandler>(),

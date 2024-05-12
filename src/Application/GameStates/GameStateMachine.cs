@@ -9,16 +9,37 @@ using System.Diagnostics;
 
 namespace SeaBattle.Application.GameStates;
 
+/// <summary>
+/// Represents the game state machine that manages the different states of the game.
+/// </summary>
 public class GameStateMachine : IStateMachine
 {
+    /// <summary>
+    /// Event that is triggered when the state of the game state machine changes.
+    /// </summary>
     public event Action<Type>? OnStateChanged;
 
+    /// <summary>
+    /// Gets the type of the current state.
+    /// </summary>
     public Type? CurrentStateType { get; private set; }
 
     private IState? _currentState;
     private Dictionary<Type, IState> _states = new ();
 
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GameStateMachine"/> class with the necessary components for managing the game states.
+    /// </summary>
+    /// <param name="movesHandler">The player moves handler.</param>
+    /// <param name="movesController">The moves controller.</param>
+    /// <param name="boardBuilder">The player board builder.</param>
+    /// <param name="builldHandler">The player board build handler.</param>
+    /// <param name="aIAgent">The AI agent.</param>
+    /// <param name="setupHandler">The game setup handler.</param>
+    /// <param name="playerBoard">The player's game board.</param>
+    /// <param name="enemyBoard">The enemy's game board.</param>
+    /// <param name="shipsForRestart">The array of ships to be used when restarting the game.</param>
+    /// <param name="restartHandler">The game end action handler for restarting the game.</param>
     public GameStateMachine(IPlayerMovesHandler movesHandler, PlayerMovesController movesController, 
         PlayerBoardBuilder boardBuilder, IPlayerBoardBuilldHandler builldHandler,
         IAIAgent aIAgent, IGameSetupHandler setupHandler,
@@ -35,6 +56,11 @@ public class GameStateMachine : IStateMachine
         _states[typeof(EnemyWinState)] = new EnemyWinState(restartHandler);
     }
 
+    /// <summary>
+    /// Changes the current state of the game state machine to the specified state type.
+    /// </summary>
+    /// <typeparam name="TState">The type of the state to change to.</typeparam>
+    /// <exception cref="UnknownStateException">Thrown when the specified state type is not recognized.</exception>
     public void Change<TState>() where TState : IState
     {
         if (!_states.ContainsKey(typeof(TState)))

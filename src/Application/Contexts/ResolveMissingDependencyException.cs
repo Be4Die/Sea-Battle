@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SeaBattle.Application.Contexts;
+﻿namespace SeaBattle.Application.Contexts;
 
 /// <summary>
 /// The exception that is thrown when an attempt is made to resolve a dependency that is not present in the dependency injection container.

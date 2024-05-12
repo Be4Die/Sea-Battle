@@ -7,8 +7,15 @@ using SeaBattle.Domain.GameBoard;
 
 namespace SeaBattle.Application.GameStates;
 
+/// <summary>
+/// Factory class for creating instances of the <see cref="GameStateMachine"/> class.
+/// </summary>
 internal class GameStateMachineFactory
 {
+    /// <summary>
+    /// Creates a new instance of the <see cref="GameStateMachine"/> class with dependencies resolved from the <see cref="GameContext"/>.
+    /// </summary>
+    /// <returns>A new instance of the <see cref="GameStateMachine"/> class.</returns>
     public GameStateMachine Create() => new GameStateMachine(
         GameContext.ResolveSingle<IPlayerMovesHandler>(),
         GameContext.ResolveSingle<PlayerMovesController>(),
