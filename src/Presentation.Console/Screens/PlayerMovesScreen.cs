@@ -96,7 +96,7 @@ internal class PlayerMovesScreen : BaseGameScreen
         {
             sb.Append(Chars.BoarderTop);
         }
-        sb.AppendLine();
+        sb.AppendLine();    
 
         return sb.ToString();
     }
