@@ -1,7 +1,7 @@
 ﻿using SeaBattle.Application.PlayerMoves;
 using SeaBattle.Domain.BoardNavigation;
 
-namespace SeaBattle.PresentationConsole.Controlls;
+namespace SeaBattle.Presentation.Console.Controlls;
 
 /// <summary>
 /// Handles player moves in a console application.

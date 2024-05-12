@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace SeaBattle.PresentationConsole;
+namespace SeaBattle.Presentation.Console;
 
 /// <summary>
 /// Provides utility methods for console applications.
@@ -25,14 +25,14 @@ internal static class ConsoleTools
 
         try
         {
-            Console.SetWindowSize(
-                setWidth ? consoleWidth : Console.WindowWidth,
-                setHeight ? consoleWidth : Console.WindowHeight);
+            System.Console.SetWindowSize(
+                setWidth ? consoleWidth : System.Console.WindowWidth,
+                setHeight ? consoleWidth : System.Console.WindowHeight);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Console.SetBufferSize(
-                    setWidth ? consoleWidth : Console.BufferWidth,
-                    setHeight ? consoleHeight : Console.BufferHeight);
+                System.Console.SetBufferSize(
+                    setWidth ? consoleWidth : System.Console.BufferWidth,
+                    setHeight ? consoleHeight : System.Console.BufferHeight);
             }
         }
         catch (IOException e)

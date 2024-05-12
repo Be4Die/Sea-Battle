@@ -1,4 +1,4 @@
-﻿namespace SeaBattle.PresentationConsole.Screens;
+﻿namespace SeaBattle.Presentation.Console.Screens;
 
 /// <summary>
 /// Represents a screen that displays a logo and additional text in a console application.
@@ -32,6 +32,10 @@ internal class LogoScreen : ScreenView
         _subText = sub;
         _spaces = spaces;
     }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LogoScreen"/> class with the specified logo text, subtext, and number of spaces.
+    /// </summary>
+    public LogoScreen() { }
 
     /// <summary>
     /// Shows the logo screen by outputting the logo text, a specified number of empty lines, and the subtext to the console.
@@ -41,11 +45,11 @@ internal class LogoScreen : ScreenView
         base.Show();
         ConsoleTools.SetConsoleSizeFromText(_logoText, setHeight: false);
 
-        Console.WriteLine(_logoText);
+        System.Console.WriteLine(_logoText);
         for (int i = 0; i < _spaces; i++)
         {
-            Console.WriteLine();
+            System.Console.WriteLine();
         }
-        Console.WriteLine(_subText);
+        System.Console.WriteLine(_subText);
     }
 }

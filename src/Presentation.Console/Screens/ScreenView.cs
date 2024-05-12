@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SeaBattle.PresentationConsole.Screens;
+namespace SeaBattle.Presentation.Console.Screens;
 
 /// <summary>
 /// Represents a base class for screen views in a console application.
@@ -20,7 +20,7 @@ internal abstract class ScreenView
     /// </summary>
     public virtual void Hide()
     {
-        Console.Clear();
+        System.Console.Clear();
         Debug.WriteLine($"[{GetType().Name}] Hide");
     }
 }

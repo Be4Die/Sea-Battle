@@ -5,7 +5,7 @@ using SeaBattle.Application.GameStates.States;
 using SeaBattle.Application.PlayerMoves;
 using SeaBattle.Domain.GameBoard;
 
-namespace SeaBattle.PresentationConsole.Screens;
+namespace SeaBattle.Presentation.Console.Screens;
 
 /// <summary>
 /// Manages the screens for a console application based on the game state.

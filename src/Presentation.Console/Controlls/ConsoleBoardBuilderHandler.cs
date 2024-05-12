@@ -1,7 +1,7 @@
 ﻿using SeaBattle.Application.BoardBuilding;
 using SeaBattle.Domain.BoardNavigation;
 
-namespace SeaBattle.PresentationConsole.Controlls;
+namespace SeaBattle.Presentation.Console.Controlls;
 
 /// <summary>
 /// Handles player board building actions in a console application.

@@ -1,6 +1,6 @@
 ﻿using SeaBattle.Application;
 
-namespace SeaBattle.PresentationConsole.Controlls;
+namespace SeaBattle.Presentation.Console.Controlls;
 
 /// <summary>
 /// Handles game end actions in a console application.

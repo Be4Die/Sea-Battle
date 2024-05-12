@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SeaBattle.PresentationConsole.Controlls;
+namespace SeaBattle.Presentation.Console.Controlls;
 
 /// <summary>
 /// Handles console input for a console application.
@@ -44,9 +44,9 @@ public sealed class Input : IDisposable
 
         while (!_cts.IsCancellationRequested)
         {
-            if (Console.KeyAvailable)
+            if (System.Console.KeyAvailable)
             {
-                keyInfo = Console.ReadKey(true);
+                keyInfo = System.Console.ReadKey(true);
                 OnKeyPress?.Invoke(keyInfo);
             }
 

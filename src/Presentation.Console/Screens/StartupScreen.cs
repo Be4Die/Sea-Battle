@@ -1,6 +1,6 @@
 ﻿using Presentation.Console.Resources;
 
-namespace SeaBattle.PresentationConsole.Screens;
+namespace SeaBattle.Presentation.Console.Screens;
 
 /// <summary>
 /// Represents a screen that displays a startup message in a console application.

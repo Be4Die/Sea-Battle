@@ -1,4 +1,4 @@
-﻿namespace SeaBattle.PresentationConsole.Screens;
+﻿namespace SeaBattle.Presentation.Console.Screens;
 
 /// <summary>
 /// Represents a base class for game screens in a console application.
@@ -29,19 +29,19 @@ internal class BaseGameScreen : ScreenView
     public override void Show()
     {
         base.Show();
-        Console.WriteLine(_header);
-        for (int i = 0; i < Console.WindowWidth-10; i++)
+        System.Console.WriteLine(_header);
+        for (int i = 0; i < System.Console.WindowWidth-10; i++)
         {
-            Console.Write(_divider);
+            System.Console.Write(_divider);
         }
-        Console.WriteLine();
-        Console.SetCursorPosition((Console.WindowWidth - _content.Split("\n").Max(p => p.Length)) / 2, Console.CursorTop);
+        System.Console.WriteLine();
+        System.Console.SetCursorPosition((System.Console.WindowWidth - _content.Split("\n").Max(p => p.Length)) / 2, System.Console.CursorTop);
         foreach (var row in _content.Split("\n"))
         {
-            Console.SetCursorPosition((Console.WindowWidth - _content.Split("\n").Max(p => p.Length)) / 2, Console.CursorTop);
-            Console.WriteLine(row);    
+            System.Console.SetCursorPosition((System.Console.WindowWidth - _content.Split("\n").Max(p => p.Length)) / 2, System.Console.CursorTop);
+            System.Console.WriteLine(row);    
         }
-        Console.SetCursorPosition(0, 0);
+        System.Console.SetCursorPosition(0, 0);
     }
 
     /// <summary>

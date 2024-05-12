@@ -6,8 +6,8 @@ using SeaBattle.Application.GameStates;
 using SeaBattle.Application.GameStates.States;
 using SeaBattle.Application.PlayerMoves;
 
-using SeaBattle.PresentationConsole.Controlls;
-using SeaBattle.PresentationConsole.Screens;
+using SeaBattle.Presentation.Console.Controlls;
+using SeaBattle.Presentation.Console.Screens;
 using System.Text;
 
 // Set the output encoding of the console to UTF-8 for proper display of special characters

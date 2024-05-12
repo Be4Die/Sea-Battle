@@ -3,7 +3,7 @@ using SeaBattle.Application.PlayerMoves;
 using SeaBattle.Domain.GameBoard;
 using System.Text;
 
-namespace SeaBattle.PresentationConsole.Screens;
+namespace SeaBattle.Presentation.Console.Screens;
 
 /// <summary>
 /// Represents a screen that displays the player's moves in a console application.

@@ -1,4 +1,4 @@
-﻿namespace SeaBattle.PresentationConsole.Screens;
+﻿namespace SeaBattle.Presentation.Console.Screens;
 
 // <summary>
 /// The exception that is thrown when a screen is missing.

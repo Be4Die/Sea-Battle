@@ -3,7 +3,7 @@ using SeaBattle.Application.BoardBuilding;
 using SeaBattle.Domain.GameBoard;
 using System.Text;
 
-namespace SeaBattle.PresentationConsole.Screens;
+namespace SeaBattle.Presentation.Console.Screens;
 
 /// <summary>
 /// Represents a screen that displays the board building process in a console application.
