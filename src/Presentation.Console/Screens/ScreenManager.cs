@@ -12,9 +12,9 @@ namespace SeaBattle.Presentation.Console.Screens;
 /// </summary>
 internal sealed class ScreenManager : IDisposable
 {
-    private Dictionary<Type, ScreenView> _screens = new ();
+    private readonly Dictionary<Type, ScreenView> _screens = [];
+    private readonly GameStateMachine _stateMachine;
     public ScreenView? _lastScreen;
-    private GameStateMachine _stateMachine;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ScreenManager"/> class with the specified game state machine.
@@ -45,11 +45,11 @@ internal sealed class ScreenManager : IDisposable
 
     private void OnStateChangedCallback(Type type)
     {
-        if (!_screens.ContainsKey(type))
+        if (!_screens.TryGetValue(type, out var screen))
             throw new MissingScreenException(type);
 
         _lastScreen?.Hide();
-        _lastScreen = _screens[type];
+        _lastScreen = screen;
         _lastScreen.Show();
     }
 

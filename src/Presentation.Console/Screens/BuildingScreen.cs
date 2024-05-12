@@ -60,7 +60,7 @@ internal class BuildingScreen : BaseGameScreen
     private string BoardToString()
     {
         // Оставь надежду всяк сюда входящий
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new ();
         for (int i = 0; i < _board.Width * 2 + 1; i++)
         {
             sb.Append(Chars.BorderBottom);

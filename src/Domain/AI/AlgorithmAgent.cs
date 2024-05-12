@@ -10,12 +10,12 @@ namespace SeaBattle.Domain.AI;
 public class AlgorithmAgent : IAIAgent
 {
     protected readonly Board _board;
-    protected readonly Random _random = new Random();
-    protected readonly (uint, uint)[] _pattern = new (uint, uint)[]{
+    protected readonly Random _random = new ();
+    protected readonly (uint, uint)[] _pattern = [
         (2,0), (6,0), (3,1), (7,1), (1,2), (5, 2),
         (9,2), (0,3), (4,3), (8,3), (2,4), (6,4),
         (3,5), (7,5), (1,6), (5,6), (9,6), (0,7),
-        (4,7), (9,7), (2,8), (6,8), (3,9), (7,9)};
+        (4,7), (9,7), (2,8), (6,8), (3,9), (7,9)];
 
 
     // -1 - not data
@@ -82,8 +82,7 @@ public class AlgorithmAgent : IAIAgent
 
     private List<(int, int)> FindVector(int x, int y)
     {
-        List<(int, int)> vector = new List<(int, int)>();
-        vector.Add((x, y));
+        List<(int, int)> vector = [(x, y)];
 
         // check up
         int i = x - 1;
@@ -146,7 +145,7 @@ public class AlgorithmAgent : IAIAgent
     // This method chooses a random cell when there are no more moves in the pattern
     protected virtual (uint, uint) ChoiceCeilWhenDeadEnd()
     {
-        List<(uint, uint)> correctCells = new List<(uint, uint)>();
+        List<(uint, uint)> correctCells = [];
 
         for (uint i = 0; i < _data.GetLength(0); i++)
         {

@@ -18,7 +18,7 @@ internal class SetupHandler : IGameSetupHandler, IDisposable
     public bool Enabaled { get; set; }
 
 
-    private Input _input;
+    private readonly Input _input;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SetupHandler"/> class with the specified input handler.

@@ -13,6 +13,6 @@ internal class LoseScreen : LogoScreen
     public LoseScreen()
     {
         _logoText = TextsRU.WinEnemyLabel.Replace("\\r\\n", Environment.NewLine);
-        _subText = TextsRU.LosePromt + Environment.NewLine + TextsRU.EndGamePromt;
+        _subText = TextsRU.LosePromt.Replace("\\n", Environment.NewLine) + Environment.NewLine + TextsRU.EndGamePromt.Replace("\\n", Environment.NewLine);
     }
 }

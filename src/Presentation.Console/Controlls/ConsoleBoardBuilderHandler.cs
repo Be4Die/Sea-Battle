@@ -29,7 +29,7 @@ internal class ConsoleBoardBuilderHandler : IPlayerBoardBuilldHandler, IDisposab
     /// </summary>
     public bool Enabaled { get ; set; }
 
-    private Input _input;
+    private readonly Input _input;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsoleBoardBuilderHandler"/> class with the specified input handler.

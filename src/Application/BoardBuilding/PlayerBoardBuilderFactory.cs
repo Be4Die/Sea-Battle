@@ -4,9 +4,9 @@ using SeaBattle.Domain.GameBoard;
 
 namespace SeaBattle.Application.BoardBuilding;
 
-internal class PlayerBoardBuilderFactory
+internal static class PlayerBoardBuilderFactory
 {
-    public PlayerBoardBuilder Create() => new PlayerBoardBuilder(
+    public static PlayerBoardBuilder Create() => new (
         GameContext.ResolveById<Board>(GameContext.PlayerBoardId),
         GameContext.ResolveSingle<Ship[]>());
 }

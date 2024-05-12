@@ -15,7 +15,7 @@ internal static class ConsoleTools
     /// <param name="safeSpace">The additional space to add to the width and height.</param>
     /// <param name="setWidth">Whether to set the width of the console window.</param>
     /// <param name="setHeight">Whether to set the height of the console window.</param>
-    public static void SetConsoleSizeFromText(string text, int safeSpace = 5, bool setWidth = true, bool setHeight = true)
+    public static void SetConsoleSizeFromText(string text, bool setWidth = true, bool setHeight = true)
     {
         int maxLineLength = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                                 .Max(line => line.Length);

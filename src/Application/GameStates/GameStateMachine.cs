@@ -25,7 +25,7 @@ public class GameStateMachine : IStateMachine
     public Type? CurrentStateType { get; private set; }
 
     private IState? _currentState;
-    private Dictionary<Type, IState> _states = new ();
+    private readonly Dictionary<Type, IState> _states = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameStateMachine"/> class with the necessary components for managing the game states.

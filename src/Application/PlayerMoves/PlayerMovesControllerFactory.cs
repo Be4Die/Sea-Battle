@@ -3,8 +3,8 @@ using SeaBattle.Domain.GameBoard;
 
 namespace SeaBattle.Application.PlayerMoves;
 
-internal class PlayerMovesControllerFactory
+internal static class PlayerMovesControllerFactory
 {
-    public PlayerMovesController Create() => new PlayerMovesController(
+    public static PlayerMovesController Create() => new (
         GameContext.ResolveById<Board>(GameContext.EnemyBoardId));
 }

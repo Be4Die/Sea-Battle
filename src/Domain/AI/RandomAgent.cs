@@ -9,7 +9,7 @@ namespace SeaBattle.Domain.AI;
 /// </summary>
 public sealed class RandomAgent : IAIAgent
 {
-    private readonly Random _random = new Random();
+    private readonly Random _random = new ();
     private readonly Board _board;
 
     /// <summary>

@@ -13,7 +13,7 @@ public sealed class Input : IDisposable
     public event Action<ConsoleKeyInfo>? OnKeyPress;
 
     private readonly int _delay = 50;
-    private CancellationTokenSource _cts = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cts = new ();
     private Task? _inputTask;
 
     /// <summary>

@@ -262,6 +262,7 @@ public class Board : IDisposable
         OnHited = null;
         OnShipPlaced = null;
         OnShipRemoved = null;
+        GC.SuppressFinalize(this);
     }
 
 

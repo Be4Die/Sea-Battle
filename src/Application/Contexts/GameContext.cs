@@ -22,8 +22,8 @@ public static class GameContext
     /// </summary>
     public static readonly string EnemyBoardId = "Enemy";
 
-    private static Dictionary<Type, object> _singleDIContainer = new ();
-    private static Dictionary<string, object> _idDIContainer = new ();
+    private readonly static Dictionary<Type, object> _singleDIContainer = [];
+    private readonly static Dictionary<string, object> _idDIContainer = [];
 
     /// <summary>
     /// Injects a single instance of a type into the dependency injection container.
@@ -88,10 +88,10 @@ public static class GameContext
     /// <exception cref="ResolveMissingDependencyException">Thrown if the instance is not found in the container.</exception>
     public static T ResolveById<T>(string id)
     {
-        if (!_idDIContainer.ContainsKey(id))
+        if (!_idDIContainer.TryGetValue(id, out var instance))
             throw new ResolveMissingDependencyException(typeof(T));
 
-        return (T)_idDIContainer[id];
+        return (T)instance;
     }
 
     /// <summary>
@@ -99,23 +99,22 @@ public static class GameContext
     /// </summary>
     public static void Initialize()
     {
-        var gameRule = new GameRuleFactory().CreateClassicData();
+        var gameRule = GameRuleFactory.CreateClassicData();
         InjectSingle<GameRuleData>(gameRule);
-        var boardFactory = new BoardFactory();
-        var playerBoard = boardFactory.CreateBoardFromRules(gameRule);
+        var playerBoard = BoardFactory.CreateBoardFromRules(gameRule);
         InjectById<Board>(playerBoard, PlayerBoardId);
         var agent = AIAgentFactory.CreateAgent(gameRule.DifficultyLevel, playerBoard);
         InjectSingle<IAIAgent>(agent);
-        var enemyBoard = boardFactory.CreateEnemyBoard(gameRule, agent);
+        var enemyBoard = BoardFactory.CreateEnemyBoard(gameRule, agent);
         InjectById<Board>(enemyBoard, EnemyBoardId);
 
-        InjectSingle<Ship[]>(new ShipFactory().CreateShipsFromGameRule(gameRule));
+        InjectSingle<Ship[]>(ShipFactory.CreateShipsFromGameRule(gameRule));
 
-        InjectSingle<PlayerMovesController>(new PlayerMovesControllerFactory().Create());
-        InjectSingle<PlayerBoardBuilder>(new PlayerBoardBuilderFactory().Create());
+        InjectSingle<PlayerMovesController>(PlayerMovesControllerFactory.Create());
+        InjectSingle<PlayerBoardBuilder>(PlayerBoardBuilderFactory.Create());
 
-        InjectSingle<GameStateMachine>(new GameStateMachineFactory().Create());
-        InjectSingle<GameCycle>(new GameCycleFactory().Create());
+        InjectSingle<GameStateMachine>(GameStateMachineFactory.Create());
+        InjectSingle<GameCycle>(GameCycleFactory.Create());
 
         Debug.WriteLine($"[{nameof(GameContext)}] {nameof(GameContext.Initialize)}");
     }
@@ -129,15 +128,13 @@ public static class GameContext
         foreach (var item in _singleDIContainer)
         {
             var disposible = item.Value as IDisposable;
-            if (disposible != null)
-                disposible.Dispose();
+            disposible?.Dispose();
         }
 
         foreach (var item in _idDIContainer)
         {
             var disposible = item.Value as IDisposable;
-            if (disposible != null)
-                disposible.Dispose();
+            disposible?.Dispose();
         }
 
         Debug.WriteLine($"[{nameof(GameContext)}] {nameof(GameContext.Dispose)}");

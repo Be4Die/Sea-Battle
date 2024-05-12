@@ -23,7 +23,7 @@ internal class ConsoleMovesHandler : IPlayerMovesHandler, IDisposable
     /// </summary>
     public bool Enabaled { get; set; }
 
-    private Input _input;
+    private readonly Input _input;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsoleMovesHandler"/> class with the specified input handler.

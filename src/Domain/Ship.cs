@@ -94,9 +94,10 @@ public class Ship : IDisposable
     public void Dispose()
     {
         OnHited = null;
-        _aliveSegments = new bool[0];
+        _aliveSegments = [];
         IsAlive = false;
         Length = 0;
         Orientation = 0;
+        GC.SuppressFinalize(this);
     }
 }

@@ -10,13 +10,13 @@ namespace SeaBattle.Application.GameStates;
 /// <summary>
 /// Factory class for creating instances of the <see cref="GameStateMachine"/> class.
 /// </summary>
-internal class GameStateMachineFactory
+internal static class GameStateMachineFactory
 {
     /// <summary>
     /// Creates a new instance of the <see cref="GameStateMachine"/> class with dependencies resolved from the <see cref="GameContext"/>.
     /// </summary>
     /// <returns>A new instance of the <see cref="GameStateMachine"/> class.</returns>
-    public GameStateMachine Create() => new GameStateMachine(
+    public static GameStateMachine Create() => new (
         GameContext.ResolveSingle<IPlayerMovesHandler>(),
         GameContext.ResolveSingle<PlayerMovesController>(),
         GameContext.ResolveSingle<PlayerBoardBuilder>(),

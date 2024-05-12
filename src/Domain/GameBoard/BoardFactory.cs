@@ -13,10 +13,7 @@ public class BoardFactory
     /// </summary>
     /// <param name="data">Game rule data containing the board dimensions.</param>
     /// <returns>A new game board with the specified dimensions.</returns>
-    public Board CreateBoardFromRules(GameRuleData data)
-    {
-        return new Board(data.BoardWidth, data.BoardHeight);
-    }
+    public static Board CreateBoardFromRules(GameRuleData data) => new (data.BoardWidth, data.BoardHeight);
 
     /// <summary>
     /// Creates an enemy board based on the game rules and an AI agent.
@@ -24,6 +21,6 @@ public class BoardFactory
     /// <param name="data">Game rule data containing the board dimensions.</param>
     /// <param name="agent">The AI agent that will generate the board.</param>
     /// <returns>A new enemy board with the specified dimensions and ships placed.</returns>
-    public Board CreateEnemyBoard(GameRuleData data, IAIAgent agent) => agent.GenerateBoard(data.BoardWidth, data.BoardHeight,
-        new ShipFactory().CreateShipsFromGameRule(data));
+    public static Board CreateEnemyBoard(GameRuleData data, IAIAgent agent) => agent.GenerateBoard(data.BoardWidth, data.BoardHeight,
+        ShipFactory.CreateShipsFromGameRule(data));
 }

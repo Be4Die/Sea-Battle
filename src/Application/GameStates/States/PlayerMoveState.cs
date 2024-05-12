@@ -42,5 +42,6 @@ public class PlayerMoveState : IState, IDisposable
     {
         _movesHandler.OnMovePress -= _movesController.MoveCursor;
         _movesHandler.OnShootPress -= () => _movesController.DoShoot();
+        GC.SuppressFinalize(this);
     }
 }

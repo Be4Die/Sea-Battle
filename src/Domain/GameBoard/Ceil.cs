@@ -106,5 +106,6 @@ public class Ceil : IDisposable
         Ship = null;
         ShipSegmentIndex = null;
         OnHited = null;
+        GC.SuppressFinalize(this);
     }
 }

@@ -15,11 +15,11 @@ public static class AIAgentFactory
     /// <returns>An instance of <see cref="IAIAgent"/> that corresponds to the specified difficulty level.</returns>
     public static IAIAgent CreateAgent(AIDifficultyLevel aIDifficulty, Board board)
     {
-        switch (aIDifficulty)
+        return aIDifficulty switch
         {
-            case AIDifficultyLevel.Easy: return new RandomAgent(board);
-            case AIDifficultyLevel.Medium: return new AlgorithmAgent(board);
-            default: return new RandomAgent(board);
-        }
+            AIDifficultyLevel.Easy => new RandomAgent(board),
+            AIDifficultyLevel.Medium => new RandomAgent(board),
+            _ => new RandomAgent(board)
+        };
     }
 }

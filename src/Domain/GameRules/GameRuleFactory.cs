@@ -9,14 +9,8 @@ public class GameRuleFactory
     /// Creates a classic game rule data with easy AI difficulty, 10x10 board size, and standard ship sizes.
     /// </summary>
     /// <returns>A new instance of <see cref="GameRuleData"/> with classic game rule data.</returns>
-    public GameRuleData CreateClassicData()
-    {
-        return new GameRuleData(
+    public static GameRuleData CreateClassicData() => new (
             AI.AIDifficultyLevel.Easy, 
             10, 10, 
-            new uint[] 
-            {
-                4, 3, 3, 2, 2, 2, 1, 1, 1, 1
-            });
-    }
+            [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]);
 }
