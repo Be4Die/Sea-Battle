@@ -2,17 +2,46 @@
 
 namespace SeaBattle.Domain.GameBoard;
 
+/// <summary>
+/// Represents the game board for the Sea Battle game.
+/// The board manages the placement and removal of ships, as well as handling hits.
+/// </summary>
 public class Board : IDisposable
 {
+    /// <summary>
+    /// Event triggered when a ship is placed on the board.
+    /// </summary>
     public event Action<Ship, uint, uint>? OnShipPlaced;
+
+    /// <summary>
+    /// Event triggered when a ship is removed from the board.
+    /// </summary
     public event Action<Ship, uint, uint>? OnShipRemoved;
+
+    /// <summary>
+    /// Event triggered when a cell on the board is hit.
+    /// </summary>
     public event Action<uint, uint, bool>? OnHited;
 
+
+    /// <summary>
+    /// Gets the width of the game board.
+    /// </summary>
     public uint Width { get; protected set; }
+
+    /// <summary>
+    /// Gets the height of the game board.
+    /// </summary>
     public uint Height { get; protected set; }
 
     private Ceil[,] _ceils;
 
+
+    /// <summary>
+    /// Initializes a new instance of the Board class with the specified width and height.
+    /// </summary>
+    /// <param name="width">The width of the board.</param>
+    /// <param name="height">The height of the board.</param>
     public Board(uint width, uint height)
     {
         Width = width; 
@@ -24,6 +53,10 @@ public class Board : IDisposable
                 _ceils[i, j] = new();
     }
 
+    /// <summary>
+    /// Initializes a new instance of the Board class with the specified array of cells.
+    /// </summary>
+    /// <param name="ceils">The array of cells representing the board.</param>
     public Board(Ceil[,] ceils)
     {
         Width = (uint)ceils.GetLength(0);
@@ -31,6 +64,10 @@ public class Board : IDisposable
         _ceils = ceils;
     }
 
+
+    /// <summary>
+    /// Clears the board, removing all ships and resetting all cells.
+    /// </summary>
     public void Clear()
     {
         _ceils = new Ceil[Width, Height];
@@ -40,6 +77,10 @@ public class Board : IDisposable
                 _ceils[i, j] = new();
     }
 
+    /// <summary>
+    /// Checks if all ships on the board are destroyed.
+    /// </summary>
+    /// <returns>True if all ships are destroyed; otherwise, false.</returns>
     public bool CheckAllShipsDestroiedCondition()
     {
         bool isDestroied = true;
@@ -56,6 +97,12 @@ public class Board : IDisposable
         return isDestroied;
     }
 
+    /// <summary>
+    /// Attempts to hit a cell at the specified coordinates.
+    /// </summary>
+    /// <param name="x">The X coordinate of the cell to hit.</param>
+    /// <param name="y">The Y coordinate of the cell to hit.</param>
+    /// <returns>True if the cell was hit; otherwise, false.</returns>
     public bool Hit(uint x, uint y)
     {
         if (x >= _ceils.GetLength(0) || y >= _ceils.GetLength(1))
@@ -66,6 +113,13 @@ public class Board : IDisposable
         return result;
     }
 
+    /// <summary>
+    /// Removes a ship from the board starting at the specified coordinates.
+    /// </summary>
+    /// <param name="ship">The ship to remove.</param>
+    /// <param name="xStart">The starting X coordinate of the ship.</param>
+    /// <param name="yStart">The starting Y coordinate of the ship.</param>
+    /// <returns>True if the ship was successfully removed; otherwise, false.</returns>
     public bool RemoveShip(Ship ship, uint xStart, uint yStart)
     {
         if (_ceils[xStart, yStart].Ship != ship)
@@ -93,6 +147,13 @@ public class Board : IDisposable
         return true;
     }
 
+    /// <summary>
+    /// Places a ship on the board starting at the specified coordinates.
+    /// </summary>
+    /// <param name="ship">The ship to place.</param>
+    /// <param name="xStart">The starting X coordinate of the ship.</param>
+    /// <param name="yStart">The starting Y coordinate of the ship.</param>
+    /// <returns>True if the ship was successfully placed; otherwise, false.</returns>
     public bool PlaceShip(Ship ship, uint xStart, uint yStart)
     {
         if (!CanShipPlaced(ship, xStart, yStart))
@@ -118,6 +179,12 @@ public class Board : IDisposable
         return true;
     }
 
+    /// <summary>
+    /// Gets the cell at the specified coordinates.
+    /// </summary>
+    /// <param name="x">The X coordinate of the cell.</param>
+    /// <param name="y">The Y coordinate of the cell.</param>
+    /// <returns>The cell at the specified coordinates, or null if the coordinates are out of bounds.</returns>
     public Ceil? GetCeil(uint x, uint y) 
     {
         if (x >= _ceils.GetLength(0) || y >= _ceils.GetLength(1))
@@ -126,6 +193,13 @@ public class Board : IDisposable
         return _ceils[x, y];
     }
 
+    /// <summary>
+    /// Determines if a ship can be placed at the specified coordinates.
+    /// </summary>
+    /// <param name="ship">The ship to check for placement.</param>
+    /// <param name="xStart">The starting X coordinate of the ship.</param>
+    /// <param name="yStart">The starting Y coordinate of the ship.</param>
+    /// <returns>True if the ship can be placed; otherwise, false.</returns>
     public bool CanShipPlaced(Ship ship, uint xStart, uint yStart)
     {
         if (xStart >= _ceils.GetLength(0) || yStart >= _ceils.GetLength(1))
@@ -177,6 +251,12 @@ public class Board : IDisposable
         return true;
     }
 
+    /// <summary>
+    /// Releases unmanaged resources used by the object.
+    /// </summary>
+    /// <remarks>
+    /// This method sets all event delegates to null to prevent memory leaks.
+    /// </remarks>
     public void Dispose()
     {
         OnHited = null;
@@ -184,6 +264,19 @@ public class Board : IDisposable
         OnShipRemoved = null;
     }
 
+
+    /// <summary>
+    /// Returns a string that represents the current object.
+    /// </summary>
+    /// <returns>A string that represents the state of the game board.</returns>
+    /// <remarks>
+    /// This method creates a string that represents the state of the game board.
+    /// Each cell is represented by a character:
+    /// '0' - an empty cell, not hit.
+    /// '1' - a cell with a ship, not hit.
+    /// '2' - a cell with a ship, hit.
+    /// '-1' - an empty cell, hit.
+    /// </remarks>
     public override string ToString()
     {
         var sb = new StringBuilder();

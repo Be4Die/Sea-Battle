@@ -1,7 +1,7 @@
 ﻿namespace SeaBattle.Domain.GameBoard;
 
 /// <summary>
-/// Represents a single cell on the game board.
+/// Represents a single cell on the <seealso cref="Board"/>.
 /// </summary>
 public class Ceil : IDisposable
 {
@@ -95,6 +95,12 @@ public class Ceil : IDisposable
         return true;
     }
 
+    /// <summary>
+    /// Releases unmanaged resources used by the object.
+    /// </summary>
+    /// <remarks>
+    /// This method sets the reference to the ship and the ship segment index to null, and also sets the event delegate `OnHited` to null to prevent memory leaks.
+    /// </remarks>
     public void Dispose()
     {
         Ship = null;

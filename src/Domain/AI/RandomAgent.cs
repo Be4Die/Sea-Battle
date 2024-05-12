@@ -47,6 +47,16 @@ public sealed class RandomAgent : IAIAgent
         _random.Shuffle(_points);
     }
 
+    // <summary>
+    /// Fill existing board 
+    /// The method attempts to place each ship randomly on the board, ensuring that
+    /// the ship fits within the board boundaries and does not overlap with any other ships.
+    /// If a ship cannot be placed after a certain number of attempts, it is ignored.
+    /// </summary>
+    /// <param name="width">The width of the game board.</param>
+    /// <param name="height">The height of the game board.</param>
+    /// <param name="shipsToPlace">An array of ships to be placed on the board.</param>
+    /// <returns>The generated game board with the ships placed.</returns>
     public void FillBoard(Board board, Ship[] shipsToPlace)
     {
 
