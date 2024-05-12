@@ -27,7 +27,7 @@ internal class ConsoleBoardBuilderHandler : IPlayerBoardBuilldHandler, IDisposab
     /// <summary>
     /// Gets or sets a value indicating whether the console board builder handler is enabled.
     /// </summary>
-    public bool Enabaled { get ; set; }
+    public bool Enabaled { get; set; }
 
     private readonly Input _input;
 

@@ -13,7 +13,7 @@ public sealed class Input : IDisposable
     public event Action<ConsoleKeyInfo>? OnKeyPress;
 
     private readonly int _delay = 50;
-    private readonly CancellationTokenSource _cts = new ();
+    private readonly CancellationTokenSource _cts = new();
     private Task? _inputTask;
 
     /// <summary>
@@ -32,7 +32,7 @@ public sealed class Input : IDisposable
     /// <summary>
     /// Stops handling console input.
     /// </summary>
-    public void Stop() =>  _cts.Cancel();
+    public void Stop() => _cts.Cancel();
 
     /// <summary>
     /// Asynchronously handles key presses.

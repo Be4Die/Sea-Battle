@@ -60,7 +60,7 @@ internal class BuildingScreen : BaseGameScreen
     private string BoardToString()
     {
         // Оставь надежду всяк сюда входящий
-        StringBuilder sb = new ();
+        StringBuilder sb = new();
         for (int i = 0; i < _board.Width * 2 + 1; i++)
         {
             sb.Append(Chars.BorderBottom);
@@ -80,7 +80,7 @@ internal class BuildingScreen : BaseGameScreen
                 {
                     if (_boardBuilder.CursorData.HoldingShip.Orientation == Domain.Ship.Orientations.Vertical)
                     {
-                        if (y <= _boardBuilder.CursorData.Y +_boardBuilder.CursorData.HoldingShip.Length - 1 && y >= _boardBuilder.CursorData.Y 
+                        if (y <= _boardBuilder.CursorData.Y + _boardBuilder.CursorData.HoldingShip.Length - 1 && y >= _boardBuilder.CursorData.Y
                             && _boardBuilder.CursorData.X == x)
                         {
                             sb.Append(Chars.Cursor);
@@ -96,7 +96,7 @@ internal class BuildingScreen : BaseGameScreen
                     }
                     else
                     {
-                        if (x <= _boardBuilder.CursorData.X + _boardBuilder.CursorData.HoldingShip.Length - 1 && x >= _boardBuilder.CursorData.X 
+                        if (x <= _boardBuilder.CursorData.X + _boardBuilder.CursorData.HoldingShip.Length - 1 && x >= _boardBuilder.CursorData.X
                             && _boardBuilder.CursorData.Y == y)
                         {
                             sb.Append(Chars.Cursor);

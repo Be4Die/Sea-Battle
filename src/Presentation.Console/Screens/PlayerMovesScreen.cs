@@ -55,7 +55,7 @@ internal class PlayerMovesScreen : BaseGameScreen
 
     private string PlayerBoardString()
     {
-        StringBuilder sb = new ();
+        StringBuilder sb = new();
         for (int i = 0; i < _playerBoard.Width * 2 + 1; i++)
         {
             sb.Append(Chars.BorderBottom);
@@ -96,14 +96,14 @@ internal class PlayerMovesScreen : BaseGameScreen
         {
             sb.Append(Chars.BoarderTop);
         }
-        sb.AppendLine();    
+        sb.AppendLine();
 
         return sb.ToString();
     }
 
     private string EnemyBoardString()
     {
-        StringBuilder sb = new ();
+        StringBuilder sb = new();
         for (int i = 0; i < _enemyBoard.Width * 2 + 1; i++)
         {
             sb.Append(Chars.BorderBottom);

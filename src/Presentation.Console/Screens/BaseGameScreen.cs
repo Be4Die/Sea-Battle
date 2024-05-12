@@ -30,7 +30,7 @@ internal class BaseGameScreen : ScreenView
     {
         base.Show();
         System.Console.WriteLine(_header);
-        for (int i = 0; i < System.Console.WindowWidth-10; i++)
+        for (int i = 0; i < System.Console.WindowWidth - 10; i++)
         {
             System.Console.Write(_divider);
         }
@@ -39,7 +39,7 @@ internal class BaseGameScreen : ScreenView
         foreach (var row in _content.Split("\n"))
         {
             System.Console.SetCursorPosition((System.Console.WindowWidth - _content.Split("\n").Max(p => p.Length)) / 2, System.Console.CursorTop);
-            System.Console.WriteLine(row);    
+            System.Console.WriteLine(row);
         }
         System.Console.SetCursorPosition(0, 0);
     }

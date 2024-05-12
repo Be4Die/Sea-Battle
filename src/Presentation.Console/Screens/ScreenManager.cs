@@ -37,7 +37,7 @@ internal sealed class ScreenManager : IDisposable
         _screens[typeof(PlayerWinState)] = new WinScreen();
         _screens[typeof(EnemyWinState)] = new LoseScreen();
         _screens[typeof(RestartState)] = new EmptyScreen();
-        _screens[typeof(ExitState)] = new EmptyScreen(); 
+        _screens[typeof(ExitState)] = new EmptyScreen();
 
         _stateMachine = stateMachine;
         _stateMachine.OnStateChanged += OnStateChangedCallback;
